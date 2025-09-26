@@ -39,7 +39,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@main
+      uses: actions/checkout@v4
 
     - name: Check available branches
       run: |
@@ -78,7 +78,7 @@ jobs:
         ls -la MI-R4A/
         echo "检查 DIY 脚本:"
         ls -la MI-R4A/*.sh
-        echo "脚本权限:"
+        echo "设置脚本权限:"
         chmod +x MI-R4A/diy2-part1.sh
         chmod +x MI-R4A/R4A2.sh
         chmod +x MI-R4A/diy2-part3.sh
@@ -89,12 +89,12 @@ jobs:
         echo "=== 设置 feeds 和执行 DIY Part 1 ==="
         # 确保在正确目录
         cd $GITHUB_WORKSPACE
-        
+        
         # 复制 feeds 配置
         cp $FEEDS_CONF /workdir/openwrt/feeds.conf.default
         echo "Feeds 配置:"
         cat /workdir/openwrt/feeds.conf.default
-        
+        
         # 执行 DIY Part 1（在源码目录中）
         cd /workdir/openwrt
         chmod +x $GITHUB_WORKSPACE/$DIY_P1_SH
@@ -126,10 +126,10 @@ jobs:
     - name: Load config and run DIY part 2
       run: |
         echo "=== 加载配置和执行 DIY Part 2 ==="
-        
+        
         # 确保在仓库目录
         cd $GITHUB_WORKSPACE
-        
+        
         # 复制配置文件
         if [ -f "$CONFIG_FILE" ]; then
             cp $CONFIG_FILE /workdir/openwrt/.config
@@ -137,19 +137,19 @@ jobs:
         else
             echo "警告: 配置文件 $CONFIG_FILE 不存在"
         fi
-        
+        
         # 复制 files 目录（如果有）
         if [ -d "files" ]; then
             cp -r files /workdir/openwrt/
             echo "files 目录已复制"
         fi
-        
+        
         # 执行 DIY Part 2
         cd /workdir/openwrt
         echo "执行 DIY Part 2..."
         chmod +x $GITHUB_WORKSPACE/$DIY_P2_SH
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        
+        
         echo "=== 当前配置前20行 ==="
         head -20 .config || echo "配置文件不存在"
 
@@ -160,9 +160,9 @@ jobs:
         chmod +x $DIY_P3_SH
         $GITHUB_WORKSPACE/$DIY_P3_SH
 
-    - name: SSH connection to Actions  
+    - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh != 'false') || contains(github.event.action, 'ssh')
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -189,7 +189,7 @@ jobs:
       run: |
         cd /workdir/openwrt
         echo -e "使用 $(nproc) 线程编译"
-        
+        
         # 完整编译
         echo "=== 开始编译 ==="
         make -j$(nproc) 2>&1 | tee compile.log || {
@@ -200,7 +200,7 @@ jobs:
                 exit 1
             }
         }
-        
+        
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
