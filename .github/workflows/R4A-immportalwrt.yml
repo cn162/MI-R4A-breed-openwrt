@@ -22,7 +22,7 @@ env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-24.10-6.6
   FEEDS_CONF: MI-R4A/R4A2.conf.default
-  CONFIG_FILE: MI-R4A/R4A2.config
+  CONFIG_FILE: MI-R4A/R4A.config
   DIY_P1_SH: MI-R4A/diy2-part1.sh
   DIY_P2_SH: MI-R4A/R4A2.sh
   DIY_P3_SH: MI-R4A/diy2-part3.sh
