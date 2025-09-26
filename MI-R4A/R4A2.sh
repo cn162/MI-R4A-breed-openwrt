@@ -17,7 +17,7 @@ sed -i 's/192.168.1.1/192.168.31.1/g' package/base-files/files/bin/config_genera
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='R4A-G'' package/default-settings/files/zzz-default-settings
 
 # 版本号显示
-sed -i 's/ImmortalWrt /编译时间 $(TZ=UTC-8 date "+%Y.%m.%d") @ 星新课代表 /g' package/default-settings/files/zzz-default-settings
+sed -i 's/ImmortalWrt /编译时间 $(TZ=UTC-8 date "+%Y.%m.%d") @ 杨辰 /g' package/default-settings/files/zzz-default-settings
 
 # 更改主机型号，支持中文
 sed -i "s/Xiaomi Mi Router 4A Gigabit Edition/小米4A千兆版路由/g" target/linux/ramips/dts/mt7621_xiaomi_mi-router-4a-gigabit.dts
@@ -28,7 +28,7 @@ sed -i "s/Xiaomi Mi Router 4A Gigabit Edition/小米4A千兆版路由/g" target/
 # 状态系统增加个性信息
 sed -i "s/exit 0//" package/default-settings/files/zzz-default-settings
 
-echo "sed -i '/CPU usage/a\<tr><td width=\"33%\">关于</td><td><a class=\"author-blog\" href=\"https://myxiaochuang.gitee.io\">作者博客</a>&nbsp;&nbsp;&nbsp;<a class=\"author-blog\" href=\"https://github.com/XXKDB/MI-R4A-breed-openwrt\">编译源地址</a>&nbsp;&nbsp;&nbsp;<a class=\"author-blog\" href=\"https://space.bilibili.com/359789531\">哔哩哔哩</a></td></tr>' /usr/lib/lua/luci/view/admin_status/index.htm" >> package/default-settings/files/zzz-default-settings
+echo "sed -i '/CPU usage/a\<tr><td width=\"33%\">关于</td><td><a class=\"author-blog\" href=\"https://myxiaochuang.gitee.io\">作者仓库</a>&nbsp;&nbsp;&nbsp;<a class=\"author-blog\" href=\"https://github.com/cn162/MI-R4A-breed-openwrt\">编译源地址</a>&nbsp;&nbsp;&nbsp;<a class=\"author-blog\" </a></td></tr>' /usr/lib/lua/luci/view/admin_status/index.htm" >> package/default-settings/files/zzz-default-settings
 
 echo "" >> package/default-settings/files/zzz-default-settings
 echo "exit 0" >> package/default-settings/files/zzz-default-settings
