@@ -7,7 +7,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: MI-R4A
+name: MI-R4A-Immortalwrt
 
 on:
   repository_dispatch:
@@ -20,7 +20,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-24.10-6.6
+  REPO_BRANCH: openwrt-24.10
   FEEDS_CONF: MI-R4A/R4A2.conf.default
   CONFIG_FILE: MI-R4A/R4A.config
   DIY_P1_SH: MI-R4A/diy2-part1.sh
