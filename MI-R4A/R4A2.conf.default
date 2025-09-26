@@ -1,6 +1,6 @@
 src-git packages https://github.com/immortalwrt/packages
 src-git luci https://github.com/immortalwrt/luci
 src-git routing https://github.com/immortalwrt/routing
-src-git telephony https://github.com/immortalwrt/telephony
+#src-git telephony https://github.com/immortalwrt/telephony
 src-git kenzo https://github.com/kenzok8/openwrt-packages
 src-git small https://github.com/kenzok8/small
